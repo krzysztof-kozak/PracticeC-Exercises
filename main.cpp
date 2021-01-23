@@ -1,4 +1,5 @@
 #include <iostream>
+#include <math.h>
 using std::cout;
 using std::endl;
 using std::string;
@@ -29,40 +30,43 @@ int factorial(int n) {
 }
 
 // y = ax^2 + bx + c
-int function (int a, int b, int c) {
-    if (a == 0 || b == 0) {
-    cout << "Błąd: współczynniki x oraz y nie mogą wynosić 0" << endl;
-    return 1;
-    };
+void function (int a, int b, int c) {
 
-  int zero_of_a_function_array[2] = {};
   int delta;
   string parabola_open;
+  int x1;
+  int x2;
 
   delta = b*b - 4*a*c;
   cout << "Delta wynosi: " << delta << endl;
 
-  if (a*a + b == c * -1) {
-    zero_of_a_function_array[0] = a;
-    zero_of_a_function_array[1] = -a;
+ if (delta < 0) {
+   cout << "Funkcja nie posiada miejsc zerowych " << endl;
+ }
 
-    cout << "Ilość miejsc zerowych: "<< sizeof(zero_of_a_function_array) / sizeof(zero_of_a_function_array[0]) << endl;
+ else if (delta == 0) {
+   x1 = (-b-sqrt(delta)) / 2*a;
 
-    cout << "Miejsce zerowe #1: " << zero_of_a_function_array[0] << endl;
-    cout << "Miejsce zerowe #2: " << zero_of_a_function_array[1] << endl;
-  } else {
-    cout << "Brak miejsc zerowych " << endl;
-  }
+   cout << "Funkcja posiada jedno miejsce zerowe " << endl;
+   cout << "x = " << x1 << endl;
+ }
+
+ else if (delta > 0) {
+   x1 = (-b-sqrt(delta)) / 2*a;
+   x2 = (-b+sqrt(delta)) / 2*a;
+
+   cout << "Funkcja posiada dwa miejsca zerowe " << endl;
+   cout << "x1 = " << x1 << endl;
+   cout << "x2 = " << x2 << endl;
+ }
 
   if (a < 0) {
-    parabola_open = "dołu";
+    parabola_open = "w dół";
   } else {
-    parabola_open = "góry";
+    parabola_open = "do góry";
   }
 
-  cout << "Ramiona paraboli są skierowane do " << parabola_open << endl;
-
-  return 0;
+  cout << "Ramiona paraboli są skierowane " << parabola_open << endl;
 }
 
 template<typename X, typename Y>
@@ -203,7 +207,7 @@ int main() {
   factorial(-4);
   cout << endl;
 
-  function(-1, 2, -1);
+  function(-1, 3, 4);
   cout << endl;
 
   function(2, 1, -5);
